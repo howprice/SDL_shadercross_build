@@ -1,6 +1,6 @@
 [submodule "external/SDL"]
 	path = external/SDL
-	url = git@github.com:libsdl-org/SDL.git
+	url = https://github.com/libsdl-org/SDL.git
 [submodule "external/SDL_shadercross"]
 	path = external/SDL_shadercross
-	url = git@github.com:libsdl-org/SDL_shadercross.git
+	url = https://github.com/libsdl-org/SDL_shadercross.git
