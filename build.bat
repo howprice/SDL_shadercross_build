@@ -41,7 +41,9 @@ echo Build complete!
 
 if not exist bin mkdir bin
 copy external\SDL_shadercross\build\Release\shadercross.exe bin\
-echo Executable copied to bin\shadercross.exe
+copy external\SDL_shadercross\build\external\DirectXShaderCompiler\Release\bin\dxcompiler.dll bin\
+copy external\SDL_shadercross\build\external\DirectXShaderCompiler\Release\bin\dxil.dll bin\
+echo Executable and DXC DLLs copied to bin\
 
 echo Testing shadercross HLSL to DXIL
 bin\shadercross shaders\test.vert.hlsl -s hlsl -d dxil -t vertex -e "main" -o bin\test.vert.dxil

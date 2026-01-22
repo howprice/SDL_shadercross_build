@@ -23,6 +23,8 @@ cd ../..
 
 mkdir -p bin
 cp external/SDL_shadercross/build/shadercross bin/
+cp external/SDL_shadercross/build/external/DirectXShaderCompiler/lib/libdxcompiler.so bin/
+cp external/SDL_shadercross/build/external/DirectXShaderCompiler/lib/libdxil.so bin/
 echo "Build complete! Executable is in bin/shadercross"
 
 echo "Testing shadercross HLSL to DXIL"
