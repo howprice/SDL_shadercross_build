@@ -13,6 +13,12 @@
 - Add test HLSL shaders
   - Add commands to build.sh to compile these shaders
 
+- Add build.bat to build on Windows from Visual Studio Developer Command Prompt
+
 # TODO
 
-- Add build.bat to build on Windows from Visual Studio Developer Command Prompt
+- Fix Windows build to include SPIR-V
+  - I'm not sure if this is related to the shadercross build or DirectX compiler.
+  
+  C:\dev\howprice\SDL_shadercross_build>bin\shadercross shaders\test.vert.hlsl -s hlsl -d dxil -t vertex -e "main" -o bin\test.vert.dxil
+ERROR: Failed to compile DXIL from HLSL: HLSL compilation failed: SPIR-V CodeGen not available. Please recompile with -DENABLE_SPIRV_CODEGEN=ON.
