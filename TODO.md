@@ -10,9 +10,9 @@
   - Configure and build SDL as a static library
   - Configure and build SDL_shadercross against SDL static lib as a static, vendored, CLI executable
 
-# TODO
-
-- Add shaders/test.vert.hlsl and shaders/test.frag.hlsl to text shadercross executable
+- Add test HLSL shaders
   - Add commands to build.sh to compile these shaders
+
+# TODO
 
 - Add build.bat to build on Windows from Visual Studio Developer Command Prompt
