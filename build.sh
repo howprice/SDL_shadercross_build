@@ -28,6 +28,9 @@ echo "Build complete! Executable is in bin/shadercross"
 echo "Testing shadercross HLSL to DXIL"
 bin/shadercross shaders/test.vert.hlsl -s hlsl -d dxil -t vertex -e "main" -o bin/test.vert.dxil
 bin/shadercross shaders/test.frag.hlsl -s hlsl -d dxil -t fragment -e "main" -o bin/test.frag.dxil
+echo "Testing shadercross HLSL to SPIRV"
+bin/shadercross shaders/test.vert.hlsl -s hlsl -d spirv -t vertex -e "main" -o bin/test.vert.spirv
+bin/shadercross shaders/test.frag.hlsl -s hlsl -d spirv -t fragment -e "main" -o bin/test.frag.spirv
 echo "Shader compilation tests completed successfully."
 
 # return to original directory
