@@ -12,6 +12,8 @@ or after cloning:
 
     git submodule update --init --recursive
 
+Use the provided build.sh and build.bat scripts to build on Linux or Windows. On Windows, this script should be run from a Visual Studio Developer command prompt.
+
 ## Why
 
 - I am working on a cross platform Windows + Linux project using SDL3 GPU
@@ -24,3 +26,8 @@ or after cloning:
 
 However, my project pulls in SDL3 via VCPKG for convenient cross platform building.
 - I want to build shadercross executables statically, so don't depend on the built VCPKG SDL3.dll/.so location.
+
+## Thanks
+
+- Thanks to SDL_shadercross team for fantastic product and support
+- Thanks for great https://github.com/TheSpydog/SDL_gpu_examples used as test cases
