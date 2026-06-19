@@ -13,6 +13,8 @@ if %VisualStudioVersion% == 15.0 (
 	set CMAKE_GENERATOR="Visual Studio 16 2019"
 ) else if %VisualStudioVersion% == 17.0 (
 	set CMAKE_GENERATOR="Visual Studio 17 2022"
+) else if %VisualStudioVersion% == 18.0 (
+	set CMAKE_GENERATOR="Visual Studio 18 2026"
 ) else (
 	echo Unsupported Visual Studio version
 	EXIT /B 1
