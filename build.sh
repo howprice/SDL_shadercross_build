@@ -17,14 +17,20 @@ ninja -C build
 
 # Configure and build SDL_shadercross as a static, vendored, CLI executable with SPIR-V support.
 cd ../SDL_shadercross
-cmake -S . -B build -GNinja -DCMAKE_PREFIX_PATH=../SDL/build/ -DSDLSHADERCROSS_VENDORED=ON -DSDLSHADERCROSS_DXC=ON -DENABLE_SPIRV_CODEGEN=ON -DSDLSHADERCROSS_STATIC=ON -DSDLSHADERCROSS_CLI=ON -DSDLSHADERCROSS_CLI_STATIC=ON -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++
+cmake -S . -B build -GNinja -DCMAKE_PREFIX_PATH=../SDL/build/ -DSDLSHADERCROSS_VENDORED=ON -DSDLSHADERCROSS_DXC=ON -DENABLE_SPIRV_CODEGEN=ON -DSDLSHADERCROSS_STATIC=ON -DSDLSHADERCROSS_CLI=ON -DSDLSHADERCROSS_CLI_STATIC=ON -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ -DCMAKE_CXX_FLAGS="-Wno-invalid-specialization"
 ninja -C build
 cd ../..
 
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    DYLIB_EXT="dylib"
+else
+    DYLIB_EXT="so"
+fi
+
 mkdir -p bin
 cp external/SDL_shadercross/build/shadercross bin/
-cp external/SDL_shadercross/build/external/DirectXShaderCompiler/lib/libdxcompiler.so bin/
-cp external/SDL_shadercross/build/external/DirectXShaderCompiler/lib/libdxil.so bin/
+cp external/SDL_shadercross/build/external/DirectXShaderCompiler/lib/libdxcompiler.$DYLIB_EXT bin/
+cp external/SDL_shadercross/build/external/DirectXShaderCompiler/lib/libdxil.$DYLIB_EXT bin/
 echo "Build complete! Executable is in bin/shadercross"
 
 echo "Testing shadercross HLSL to DXIL"
@@ -33,6 +39,9 @@ bin/shadercross shaders/test.frag.hlsl -s hlsl -d dxil -t fragment -e "main" -o 
 echo "Testing shadercross HLSL to SPIRV"
 bin/shadercross shaders/test.vert.hlsl -s hlsl -d spirv -t vertex -e "main" -o bin/test.vert.spirv
 bin/shadercross shaders/test.frag.hlsl -s hlsl -d spirv -t fragment -e "main" -o bin/test.frag.spirv
+echo "Testing shadercross HLSL to MSL"
+bin/shadercross shaders/test.vert.hlsl -s hlsl -d msl -t vertex -e "main" -o bin/test.vert.msl
+bin/shadercross shaders/test.frag.hlsl -s hlsl -d msl -t fragment -e "main" -o bin/test.frag.msl
 echo "Shader compilation tests completed successfully."
 
 # return to original directory
