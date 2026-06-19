@@ -17,7 +17,15 @@ ninja -C build
 
 # Configure and build SDL_shadercross as a static, vendored, CLI executable with SPIR-V support.
 cd ../SDL_shadercross
-cmake -S . -B build -GNinja -DCMAKE_PREFIX_PATH=../SDL/build/ -DSDLSHADERCROSS_VENDORED=ON -DSDLSHADERCROSS_DXC=ON -DENABLE_SPIRV_CODEGEN=ON -DSDLSHADERCROSS_STATIC=ON -DSDLSHADERCROSS_CLI=ON -DSDLSHADERCROSS_CLI_STATIC=ON -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ -DCMAKE_CXX_FLAGS="-Wno-invalid-specialization"
+
+# Set CXX flags for macOS only
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    CXX_FLAGS_EXTRA="-DCMAKE_CXX_FLAGS=-Wno-invalid-specialization"
+else
+    CXX_FLAGS_EXTRA=""
+fi
+
+cmake -S . -B build -GNinja -DCMAKE_PREFIX_PATH=../SDL/build/ -DSDLSHADERCROSS_VENDORED=ON -DSDLSHADERCROSS_DXC=ON -DENABLE_SPIRV_CODEGEN=ON -DSDLSHADERCROSS_STATIC=ON -DSDLSHADERCROSS_CLI=ON -DSDLSHADERCROSS_CLI_STATIC=ON -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ $CXX_FLAGS_EXTRA
 ninja -C build
 cd ../..
 
